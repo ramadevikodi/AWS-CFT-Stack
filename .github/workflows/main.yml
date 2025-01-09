@@ -6,7 +6,7 @@ on:
       region:
         description: 'AWS Region to deploy to'
         required: true
-        default: 'ap-southeast-1'
+        default: 'ap-south-1'
 jobs:
   # This workflow contains a single job called "deploy"
   deploy:
