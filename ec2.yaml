@@ -1,0 +1,21 @@
+Parameters:
+  InstanceTypes:
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t2.micro
+      - t2.medium
+      - m1.small
+    Description: Enter t2.micro, m1.small, or t2.medium. Default is t2.micro
+Resources:
+  AWSEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties: 
+      AvailabilityZone: ap-south-1a      
+      ImageId: ami-0fd05997b4dff7aac
+      SecurityGroupIds:
+        - sg-0b6667feed27f86a4
+      InstanceType: !Ref InstanceTypes
+      Tags:
+        - Key: Env
+          Value: Prod  
