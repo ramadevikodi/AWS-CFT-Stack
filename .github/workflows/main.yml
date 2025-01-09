@@ -1,21 +1,12 @@
 name: 'Deploy to AWS CloudFormation'
-on:
+on: 
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     inputs:
-      aws-region:
-        type: choice
-        description: 'region'
+      region:
+        description: 'AWS Region to deploy to'
         required: true
-        options:
-          - 'ap-south-1'
-      aws-access-key-id:
-        type: string
-        description: 'aws-access-key-id'
-        required: true
-      aws-secret-access-key:
-        type: string
-        description: 'secret-access-key-id'
-        required: true
+        default: 'ap-southeast-1'
 jobs:
   # This workflow contains a single job called "deploy"
   deploy:
@@ -26,11 +17,19 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout code from master branch
         uses: actions/checkout@v2
+
+      # Configure AWS Credential
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.ACCESS_KEY_SECRET }}
+          aws-region: 'ap-south-1'
+
       # Deploy to AWS CloudFormation
       - name: Deploy to AWS CloudFormation
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
-          name: AWS-CFT-Stack
+          name: tekloon-test-stack
           template: ec2.yaml
-          no-fail-on-empty-changeset: "1"
-         
+          no-fail-on-empty-changeset: "1"         
