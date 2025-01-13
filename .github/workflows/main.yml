@@ -19,10 +19,10 @@ jobs:
   deploy:
     name: Deploy AWS cloud formation   
     runs-on: ubuntu-latest    
-    defaults:
-      run:
-        shell: bash
-        working-directory: ./
+    # defaults:
+    #   run:
+    #     shell: bash
+    #     working-directory: ./
     steps:     
       - name: Checkout code from master branch
         uses: actions/checkout@v2
