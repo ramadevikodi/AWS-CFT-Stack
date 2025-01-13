@@ -38,12 +38,12 @@ jobs:
           sudo apt-get install -y awscli    
       - name: Deploy to AWS CloudFormation
         # uses: aws-actions/aws-cloudformation-github-deploy@v1
-        # with:
-        #   name: AWS-CFT-stack
-        #   template: ec2.yaml
-        #   no-fail-on-empty-changeset: "1"         
-        run: |
-          aws cloudformation deploy \
-          --template ./ec2.yaml \
-          --stack-name AWS-CFT-Stack \         
-          --no-fail-on-empty-changeset
+        with:
+          name: AWS-CFT-stack
+          template: ec2.yaml
+          no-fail-on-empty-changeset: "1"         
+        # run: |
+        #   aws cloudformation deploy \
+        #   --template ./ec2.yaml \
+        #   --stack-name AWS-CFT-Stack \         
+        #   --no-fail-on-empty-changeset
