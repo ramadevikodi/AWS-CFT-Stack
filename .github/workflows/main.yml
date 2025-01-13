@@ -32,10 +32,10 @@ jobs:
           aws-access-key-id: ${{ github.event.inputs.aws-access-key-id }}
           aws-secret-access-key: ${{ github.event.inputs.aws-secret-access-key }}
           aws-region:  ${{ github.event.inputs.aws-region }}
-      - name: Install AWS CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y awscli    
+      # - name: Install AWS CLI
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install -y awscli    
       - name: Deploy to AWS CloudFormation
         # uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
