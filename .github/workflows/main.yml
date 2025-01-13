@@ -15,35 +15,32 @@ on:
         type: string
         description: 'aws-secret-access-key'  
         required: true
-jobs: 
+jobs:
+  # This workflow contains a single job called "deploy"
   deploy:
-    name: Deploy AWS cloud formation   
-    runs-on: ubuntu-latest    
-    # defaults:
-    #   run:
-    #     shell: bash
-    #     working-directory: ./
-    steps:     
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout code from master branch
         uses: actions/checkout@v2
+
+      # Configure AWS Credential
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ github.event.inputs.aws-access-key-id }}
           aws-secret-access-key: ${{ github.event.inputs.aws-secret-access-key }}
           aws-region:  ${{ github.event.inputs.aws-region }}
-      # - name: Install AWS CLI
-      #   run: |
-      #     sudo apt-get update
-      #     sudo apt-get install -y awscli    
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y awscli          
+      # Deploy to AWS CloudFormation
       - name: Deploy to AWS CloudFormation
-        # uses: aws-actions/aws-cloudformation-github-deploy@v1
+        uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
           name: AWS-CFT-stack
           template: ec2.yaml
-          no-fail-on-empty-changeset: "1"         
-        # run: |
-        #   aws cloudformation deploy \
-        #   --template ./ec2.yaml \
-        #   --stack-name AWS-CFT-Stack \         
-        #   --no-fail-on-empty-changeset
+          no-fail-on-empty-changeset: "1"
