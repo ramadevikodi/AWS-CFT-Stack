@@ -4,9 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       aws-region:
-        description: 'AWS Region to deploy to'
-        required: true
-        default: 'ap-south-1'
+                  type: choice
+                  description: 'region'
+                  required: true
+                  options:
+                    - 'us-east-1'
+                    - 'ap-south-1'
       aws-access-key-id:
         type: string
         description: 'aws-access-key-id'
