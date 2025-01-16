@@ -1,23 +1,27 @@
 name: 'Deploy to AWS CloudFormation'
-on: 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+# on: 
+#   # Allows you to run this workflow manually from the Actions tab
+#   workflow_dispatch:
+on:
+  push:
+    branches:
+      - main
     inputs:
-      aws-region:
+       aws-region:
                   type: choice
                   description: 'region'
                   required: true
                   options:
                     - 'us-east-1'
                     - 'ap-south-1'
-      aws-access-key-id:
-        type: string
-        description: 'aws-access-key-id'
-        required: true
-      aws-secret-access-key:
-        type: string
-        description: 'aws-secret-access-key'  
-        required: true
+       aws-access-key-id:
+         type: string
+         description: 'aws-access-key-id'
+         required: true
+       aws-secret-access-key:
+         type: string
+         description: 'aws-secret-access-key'  
+         required: true
 jobs:
   # This workflow contains a single job called "deploy"
   deploy:
